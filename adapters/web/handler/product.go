@@ -84,11 +84,13 @@ func enableProduct(service application.ProductServiceInterface) http.Handler {
 		result, err := service.Enable(product)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
+			w.Write(jsonError(err.Error()))
 			return
 		}
 		err = json.NewEncoder(w).Encode(result)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
+			w.Write(jsonError(err.Error()))
 			return
 		}
 	})
@@ -107,11 +109,13 @@ func disableProduct(service application.ProductServiceInterface) http.Handler {
 		result, err := service.Disable(product)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
+			w.Write(jsonError(err.Error()))
 			return
 		}
 		err = json.NewEncoder(w).Encode(result)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
+			w.Write(jsonError(err.Error()))
 			return
 		}
 	})
