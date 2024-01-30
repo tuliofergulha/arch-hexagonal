@@ -30,7 +30,7 @@ func (p *ProductDb) Get(id string) (application.ProductInterface, error) {
 
 func (p *ProductDb) Save(product application.ProductInterface) (application.ProductInterface, error) {
 	var rows int
-	p.db.QueryRow(`seçect id from products where id = ?`, product.GetID()).Scan(&rows)
+	p.db.QueryRow(`select count(*) from products where id = ?`, product.GetID()).Scan(&rows)
 
 	if rows == 0 {
 		_, err := p.create(product)
